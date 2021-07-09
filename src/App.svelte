@@ -10,7 +10,8 @@
 		>
 			<input
 				type="text"
-				class="form-control fs-5 fw-semibold"
+				class="fs-5 fw-semibold"
+				placeholder="username"
 				bind:value={username}
 			/>
 		</div>
@@ -29,4 +30,13 @@
 			{/each}
 		</div>
 	</div>
+	<form>
+		<input type="text" class="form-control" placeholder="Enter message" />
+	</form>
 </div>
+
+<style>
+	.scrollarea {
+		min-height: 500px;
+	}
+</style>
