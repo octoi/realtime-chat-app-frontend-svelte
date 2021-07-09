@@ -1,6 +1,30 @@
 <script>
+	import { onMount } from "svelte";
+
 	let username = "username";
 	let messages = [];
+	let message = "";
+
+	onMount(() => {
+		const appId = __myenv.env.PUSHER_APP_ID;
+		const cluster = __myenv.env.PUSHER_CLUSTER;
+
+		Pusher.logToConsole = true;
+
+		var pusher = new Pusher(appId, {
+			cluster: cluster,
+		});
+
+		var channel = pusher.subscribe("my-channel");
+		channel.bind("my-event", function (data) {
+			alert(JSON.stringify(data));
+		});
+	});
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		message = "";
+	};
 </script>
 
 <div class="container">
@@ -30,8 +54,13 @@
 			{/each}
 		</div>
 	</div>
-	<form>
-		<input type="text" class="form-control" placeholder="Enter message" />
+	<form on:submit={submitHandler}>
+		<input
+			type="text"
+			class="form-control"
+			bind:value={message}
+			placeholder="Enter message"
+		/>
 	</form>
 </div>
 
