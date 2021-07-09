@@ -1,27 +1,28 @@
 <script>
 	import { onMount } from "svelte";
+	import Pusher from "pusher-js";
 
 	let username = "username";
 	let messages = [];
 	let message = "";
 
 	onMount(() => {
-		const appId = __myenv.env.PUSHER_APP_ID;
-		const cluster = __myenv.env.PUSHER_CLUSTER;
+		const appId = __myapp.env.PUSHER_APP_ID;
+		const cluster = __myapp.env.PUSHER_CLUSTER;
 
 		Pusher.logToConsole = true;
 
-		var pusher = new Pusher(appId, {
+		const pusher = new Pusher(appId, {
 			cluster: cluster,
 		});
 
-		var channel = pusher.subscribe("my-channel");
-		channel.bind("my-event", function (data) {
-			alert(JSON.stringify(data));
+		const channel = pusher.subscribe("chat");
+		channel.bind("message", (data) => {
+			messages = [...messages, data];
 		});
 	});
 
-	const submitHandler = (e) => {
+	const submitHandler = async (e) => {
 		e.preventDefault();
 		message = "";
 	};
