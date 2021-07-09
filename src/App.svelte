@@ -1,16 +1,20 @@
+<script>
+	let username = "username";
+</script>
+
 <div class="container">
 	<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-		<a
-			href="/"
+		<div
 			class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
 		>
-			<span class="fs-5 fw-semibold">List group</span>
-		</a>
+			<input
+				type="text"
+				class="form-control fs-5 fw-semibold"
+				bind:value={username}
+			/>
+		</div>
 		<div class="list-group list-group-flush border-bottom scrollarea">
-			<a
-				href="/"
-				class="list-group-item list-group-item-action py-3 lh-tight"
-			>
+			<div class="list-group-item list-group-item-action py-3 lh-tight">
 				<div
 					class="d-flex w-100 align-items-center justify-content-between"
 				>
@@ -21,7 +25,7 @@
 					Some placeholder content in a paragraph below the heading
 					and date.
 				</div>
-			</a>
+			</div>
 		</div>
 	</div>
 </div>
